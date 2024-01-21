@@ -8,7 +8,7 @@ const output = document.getElementById("output")
 let isError = false
 
 calorieCounter.addEventListener('submit', (event) => {
-  event.preventDefault()
+  
   });
 
 function cleanInputString(str){
@@ -33,7 +33,25 @@ function addEntry() {
 
   <input type="number" min="0" placeholder="Calories" id="${entryDropdown.value}-${entryNumber}-calories">
   `
-  targetInputContainer.insertAdjacentHTML() + HTMLString
+  targetInputContainer.insertAdjacentHTML("beforeend", HTMLString)
 }
 
 addEntryButton.addEventListener("click", addEntry)
+
+function getCaloriesFromInputs(list) {
+  let calories = 0
+  for(let i = 0; i < list.length; i++) {
+    const currVal = cleanInputString(list[i].value)
+    const invalidInputMatch = isInvalidInput(currVal)
+    if(invalidInputMatch){
+      alert(`Invalid Input: ${invalidInputMatch[0]}`)
+      isError = true
+      return null
+    }
+    calories += Number(currVal)
+  }
+  return calories
+}
+function calculateCalories(e) {
+  e.preventDefault()
+}
